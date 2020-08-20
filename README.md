@@ -5,52 +5,42 @@
 
 ### 总览
 
- TaichiArduboy是一个Arduboy框架的开源硬件设计。设计需要焊接，为方便DIY，全部元件采用直插，并选择最常见的方便采购的元件。口袋游戏机兼容所有arduboy游戏，您也可以编写自己的游戏上传。设置了开关控制蜂鸣器通断，板上也设置了锂电池充放一体模块，可插接JST头转接软包锂电池
-
-
-
-### 运行说明
-
-联机对战需要两台机子，两块8266开发板之间需要通过wifi进行连接。其中开启AP模式的是master机，开启STA模式的是slave机。游戏过程中，两台机子之间通过UDP协议传输己方球拍的位置数据，同时接受对方球拍的位置数据，以此达到数据同步的联机游戏效果。若对8266的AP模式和STA模式有疑问，请参阅[此处](http://www.taichi-maker.com/homepage/iot-development/iot-dev-reference/esp8266-c-plus-plus-reference/)。若不了解UDP协议在本游戏中的具体应用，可以参看[此例程](http://www.taichi-maker.com/homepage/iot-development/iot-dev-reference/esp8266-c-plus-plus-reference/wifiudp/esp8266-udp-led/)进一步了解
-
-<div align="center"><img width="100%" src="imgs/udp.jpg"> </div>
-
+ TaichiArduboy是一个Arduboy框架的开源硬件设计。设计需要焊接，为方便DIY，全部元件采用直插，并选择最常见的方便采购的元件。口袋游戏机兼容所有arduboy游戏，您也可以编写自己的游戏上传。设置了开关控制蜂鸣器通断，板上也设置了锂电池充放一体模块，可插接JST头转接软包锂电池。
 
 ### 材料清单
 |         材料          | 数量 |
 | :-------------------: | :--: |
-| ArduinoPromicro开发板 |  2   |
-|     0.96寸OLED屏      |  2   |
-|       按键开关        |  4   |
-|         跳线          | 若干 |
-|        面包板         |  2   |
+| ArduinoPromicro开发板 |  1   |
+|  0.96寸SPI 7针OLED屏  |  1   |
+|       按键开关        |  7   |
+| TP4056锂电池充放模块  |  1   |
+|      无源蜂鸣器       |  1   |
+|       PCB电路板       |  1   |
+|       JST头一对       |  1   |
+|      3.7v锂电池       |  2   |
+|      M3六角铜柱       |  4   |
+|        面包板         |  4   |
+|        M3螺母         |  4   |
 
-注：主控请一定使用ArduinoPromicro，
+注：主控请一定使用ArduinoPromicro或兼容同型号开发板,本例程内请勿使用其他型号代替。如果有多的电路板，可以用六角铜柱和螺丝把两块电路板连在一起，做成半封闭外壳，更易携带。
+
+<div align="center"><img width="100%" src="imgs/bom.jpg"> </div>
+
+
 
 ### 接线图
 
-如果没有PCB电路板，或者不方便焊接，您可以用面包板搭建一个小掌机，遵照以下电路图即可
+如果没有PCB电路板，或者不方便焊接，您可以用面包板搭建一个最简单的小掌机，遵照以下电路图即可。这个电路没有复位和电池模块，需要持续供电才能运行。
 
-<div align="center"><img width="100%" src="imgs/pong_hardware.png"> </div>
+<div align="center"><img width="100%" src="imgs/TaichiArduboy.jpg"> </div>
 
 
 
 
 ### 获取电路板
-电路板制作文件位于 /电路板加工文件 文件夹下。gerber文件请直接在PCB板厂计价入口提交压缩包。
-使用的第三方库有：
+电路板制作文件位于 /电路板加工文件 文件夹下。gerber文件请直接在PCB板厂计价入口提交压缩包送厂制版（该文件在某厂商估价5元包邮），或采购散件进行焊接。
 
-- Adafruit_GFX库
-- Adafruit_SSD1306库
-
-请前往[太极创客第三方库下载页面](http://www.taichi-maker.com/homepage/download/#library-download)进行下载。
-
-如果对ESP8266-NodeMCU开发板的使用有疑问，请参看[此处](http://www.taichi-maker.com/homepage/esp8266-nodemcu-iot/iot-c/esp8266-iot-basics/)的说明
-
-如果对添加第三方库库有疑问，请参看[此处](http://www.taichi-maker.com/homepage/reference-index/arduino-library-index/install-arduino-library/)的说明
-
-如果对烧录代码到8266有疑问，请参看[此处](http://www.taichi-maker.com/homepage/esp8266-nodemcu-iot/iot-c/esp8266-iot-basics/)的说明
-
+如果您想修改电路板文件，或制作自己的电路板印花，请访问此处
 
 
 ### 搭建说明
@@ -73,7 +63,7 @@
 
 #### step3
 
-wifi连接完成后，oled会提示，当玩家准备好开始游戏后按下按键↓
+焊接完成后用数据线将TaichiArduboy连接上电脑
 
 <div align="center"><img width="100%" src="imgs/step3.jpg"> </div>
 
@@ -81,9 +71,15 @@ wifi连接完成后，oled会提示，当玩家准备好开始游戏后按下按
 
 #### step4
 
-当双方均按下按键时，游戏正式开始。两个按键代表上下移动球拍，一旦一方没有接住球，另一方就会增加一分。游戏将持续进行↓
+游戏上传一般有两种方式。
+
+- 方式一：如果您有arduboy游戏的十六进制文件，您可以直接安装 /上传游戏 文件夹中的ArduboyUploader_setup.exe ，并打开游戏十六进制文件，选择游戏文件后烧录。烧录时如果没有反应，请按下游戏机上的RST键进行复位。本仓库 /上传游戏/不带源码的游戏 中有五个arduboy游戏的十六进制文件可供下载。
 
 <div align="center"><img width="100%" src="imgs/step4.jpg"> </div>
+
+- 方式二：如果您有arduboy游戏的源文件，请用arduinoIDE打开游戏的主程序（文件夹内的.ino文件），链接游戏机后选择Arduino/Genuino Micro开发板和相应的串口上传游戏。本仓库 /上传游戏/带源码的游戏 中有五个arduboy游戏的源码工程文件可供下载。
+
+<div align="center"><img width="100%" src="imgs/step4B.jpg"> </div>
 
 
 
