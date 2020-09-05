@@ -114,7 +114,7 @@
 
 ### 量产展示
 
-搭建好小游戏机后，可以下载任何兼容arduboy的游戏。一些网站上托管了不少游戏，可以前往此处下载
+搭建好小游戏机后，可以下载任何兼容arduboy的游戏。一些网站上托管了不少游戏，可以前往[此处](https://arduboy.ried.cl/)下载
 
 <div align="center"><img width="100%" src="imgs/website.jpg"> </div>
 
