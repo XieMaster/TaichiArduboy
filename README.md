@@ -2,7 +2,16 @@
 
 [toc]
 
+
+
+作者链接：
+@[太极创客团队](http://www.taichi-maker.com/)
+@[RHPYU](2320025806@qq.com)
+@[BlackBox14](https://github.com/blackbox114)
+
 基于Arduboy框架的游戏机项目。完全兼容Arduboy，紧凑硬件设计，实测续航约28h。
+
+项目预览视频请看[此处](https://www.bilibili.com/video/BV1Va4y177J7)。
 
 <div align="center"><img width="100%" src="imgs/gamebottitle.jpg"> </div>
 
